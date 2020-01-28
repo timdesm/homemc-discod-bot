@@ -4,6 +4,7 @@
   "description": "A custom Discord bot for the HomeMC server",
   "main": "index.js",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "discord.js": "github:discordjs/discord.js",
     "discord.js-commando": "github:discordjs/Commando",
     "ffmpeg-static": "^3.0.0",
