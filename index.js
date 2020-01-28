@@ -34,7 +34,9 @@ Structures.extend('Guild', Guild => {
   client.registry
   .registerDefaultTypes()
   .registerGroups([
-    ['music', 'Music Command Group']
+    ['music', 'Music Command Group'],
+    ['other', 'random types of commands group'],
+    ['guild', 'guild related commands']
   ])
   .registerDefaultGroups()
   .registerDefaultCommands()
