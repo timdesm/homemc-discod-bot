@@ -1,7 +1,7 @@
 const { CommandoClient } = require('discord.js-commando');
 const { Structures } = require('discord.js');
 const path = require('path');
-const { prefix, token } = require('./config.json');
+const { prefix, token, botActivity } = require('./config.json');
 
 Structures.extend('Guild', Guild => {
     class MusicGuild extends Guild {
@@ -10,7 +10,14 @@ Structures.extend('Guild', Guild => {
         this.musicData = {
           queue: [],
           isPlaying: false,
+          nowPlaying: null,
           songDispatcher: null
+        };
+        this.triviaData = {
+          isTriviaRunning: false,
+          wasTriviaEndCalled: false,
+          triviaQueue: [],
+          triviaScore: new Map()
         };
       }
     }
@@ -31,10 +38,11 @@ Structures.extend('Guild', Guild => {
   ])
   .registerDefaultGroups()
   .registerDefaultCommands()
-  .registerCommandsIn(path.join(__dirname, 'commands'));
+  .registerCommandsIn('C:/Users/timde/Cloud/Projecten/HomeMC/Discord Bot/Build 1.0/commands');
 
-client.once('ready', () => {
-  console.log('Ready!');
-});
+  client.once('ready', () => {
+    console.log('Ready!');
+    client.user.setActivity(botActivity);
+  });
 
 client.login(token);
