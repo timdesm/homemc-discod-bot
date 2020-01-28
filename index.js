@@ -40,7 +40,7 @@ Structures.extend('Guild', Guild => {
   ])
   .registerDefaultGroups()
   .registerDefaultCommands()
-  .registerCommandsIn('C:/Users/timde/Cloud/Projecten/HomeMC/Discord Bot/Build 1.0/commands');
+  .registerCommandsIn(path.join(__dirname, 'commands'));
 
   client.once('ready', () => {
     console.log('Ready!');
