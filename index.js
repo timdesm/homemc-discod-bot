@@ -1,8 +1,40 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { CommandoClient } = require('discord.js-commando');
+const { Structures } = require('discord.js');
+const path = require('path');
+const { prefix, token } = require('./config.json');
 
-client.on('ready', () => {
-    console.log('Logged in as ${client.user.tag}');
+Structures.extend('Guild', Guild => {
+    class MusicGuild extends Guild {
+      constructor(client, data) {
+        super(client, data);
+        this.musicData = {
+          queue: [],
+          isPlaying: false,
+          songDispatcher: null
+        };
+      }
+    }
+    return MusicGuild;
+  });
+
+  const client = new CommandoClient({
+    commandPrefix: prefix,
+    owner: '262952688189177857',
+    unknownCommandResponse: false
+  });
+
+
+  client.registry
+  .registerDefaultTypes()
+  .registerGroups([
+    ['music', 'Music Command Group']
+  ])
+  .registerDefaultGroups()
+  .registerDefaultCommands()
+  .registerCommandsIn(path.join(__dirname, 'commands'));
+
+client.once('ready', () => {
+  console.log('Ready!');
 });
 
-client.login('NjcxNDY0MzAzMjAyOTI2NjAy.XjArAg._gLXcuR3rNV7ZmiAFWkHCnTtuQc');
+client.login(token);
